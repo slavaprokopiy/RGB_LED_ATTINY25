@@ -1,0 +1,136 @@
+,,,       
+000000,C012,, RJMP PC+0x0013;
+000002,C052,, RJMP PC+0x0053;
+000004,C05B,, RJMP PC+0x005C;
+000006,C01D,, RJMP PC+0x001E;
+000008,C01C,, RJMP PC+0x001D ;              Relative jump 
+00000A,C06C,, RJMP PC+0x006D        ;       Relative jump 
+00000C,C061,, RJMP PC+0x0062        ;       Relative jump 
+00000E,C019,, RJMP PC+0x001A        ;       Relative jump 
+000010,C018,, RJMP PC+0x0019        ;       Relative jump 
+000012,C017,, RJMP PC+0x0018        ;       Relative jump 
+000014,C016,, RJMP PC+0x0017        ;       Relative jump 
+000016,C015,, RJMP PC+0x0016        ;       Relative jump 
+000018,C014,, RJMP PC+0x0015        ;       Relative jump 
+00001A,C013,, RJMP PC+0x0014        ;       Relative jump 
+00001C,C012,, RJMP PC+0x0013        ;       Relative jump 
+00001E,C011,, RJMP PC+0x0012        ;       Relative jump 
+000020,C010,, RJMP PC+0x0011        ;       Relative jump 
+000022,C00F,, RJMP PC+0x0010        ;       Relative jump 
+000024,C00E,, RJMP PC+0x000F        ;       Relative jump 
+000026,2411,, CLR R1                ;Clear Register 
+000028,BE1F,, OUT 0x3F,R1   ;       Out to I/O location 
+00002A,EDCF,, LDI R28,0xDF  ;       Load immediate 
+00002C,BFCD,, OUT 0x3D,R28  ;       Out to I/O location 
+00002E,E020,, LDI R18,0x00  ;       Load immediate 
+000030,E6A0,, LDI R26,0x60  ;       Load immediate 
+000032,E0B0,, LDI R27,0x00  ;       Load immediate 
+000034,C001,, RJMP PC+0x0002        ;       Relative jump 
+000036,921D,, ST X+,R1      ;       Store indirect and postincrement 
+000038,36A2,, CPI R26,0x62  ;       Compare with immediate 
+00003A,07B2,, CPC R27,R18   ;       Compare with carry 
+,,,       ;--- No source file -------------------------------------------------------------
+00003C,F7E1,, BRNE PC-0x03  ;       Branch if not equal 
+00003E,D05C,, RCALL PC+0x005D;              Relative call subroutine 
+000040,C05D,, RJMP PC+0x005E        ;       Relative jump 
+000042,CFDE,, RJMP PC-0x0021        ;       Relative jump 
+,,,       ;--- D:\FreeTime\Biz\LED_Indication\LEDIndication\LEDIndication\Debug/.././LEDIndication.cpp 
+000044,BA17,, OUT 0x17,R1   ;       Out to I/O location 
+000046,E18C,, LDI R24,0x1C  ;       Load immediate 
+000048,BB87,, OUT 0x17,R24  ;       Out to I/O location 
+00004A,BA18,, OUT 0x18,R1   ;       Out to I/O location 
+00004C,BB88,, OUT 0x18,R24  ;       Out to I/O location 
+00004E,BA11,, OUT 0x11,R1   ;       Out to I/O location 
+000050,E082,, LDI R24,0x02  ;       Load immediate 
+000052,BF85,, OUT 0x35,R24  ;       Out to I/O location 
+000054,E088,, LDI R24,0x08  ;       Load immediate 
+000056,BF85,, OUT 0x35,R24  ;       Out to I/O location 
+000058,EC80,, LDI R24,0xC0  ;       Load immediate 
+00005A,BF8B,, OUT 0x3B,R24  ;       Out to I/O location 
+00005C,B780,, IN R24,0x30   ;       In from I/O location 
+00005E,6083,, ORI R24,0x03  ;       Logical OR with immediate 
+000060,BF80,, OUT 0x30,R24  ;       Out to I/O location 
+000062,B780,, IN R24,0x30   ;       In from I/O location 
+000064,6880,, ORI R24,0x80  ;       Logical OR with immediate 
+000066,BF80,, OUT 0x30,R24  ;       Out to I/O location 
+000068,B780,, IN R24,0x30   ;       In from I/O location 
+00006A,6280,, ORI R24,0x20  ;       Logical OR with immediate 
+00006C,BF80,, OUT 0x30,R24  ;       Out to I/O location 
+00006E,BE13,, OUT 0x33,R1   ;       Out to I/O location 
+000070,BE16,, OUT 0x36,R1   ;       Out to I/O location 
+000072,BE1C,, OUT 0x3C,R1   ;       Out to I/O location 
+000074,B789,, IN R24,0x39   ;       In from I/O location 
+000076,6082,, ORI R24,0x02  ;       Logical OR with immediate 
+,,,       ;--- D:\FreeTime\Biz\LED_Indication\LEDIndication\LEDIndication\Debug/.././LEDIndication.cpp 
+000078,BF89,, OUT 0x39,R24  ;       Out to I/O location 
+00007A,B58F,, IN R24,0x2F   ;       In from I/O location 
+00007C,6083,, ORI R24,0x03  ;       Logical OR with immediate 
+00007E,BD8F,, OUT 0x2F,R24  ;       Out to I/O location 
+000080,B58F,, IN R24,0x2F   ;       In from I/O location 
+000082,6880,, ORI R24,0x80  ;       Logical OR with immediate 
+000084,BD8F,, OUT 0x2F,R24  ;       Out to I/O location 
+000086,B58F,, IN R24,0x2F   ;       In from I/O location 
+000088,6280,, ORI R24,0x20  ;       Logical OR with immediate 
+00008A,BD8F,, OUT 0x2F,R24  ;       Out to I/O location 
+00008C,BC1E,, OUT 0x2E,R1   ;       Out to I/O location 
+00008E,BC1B,, OUT 0x2B,R1   ;       Out to I/O location 
+000090,BC1A,, OUT 0x2A,R1   ;       Out to I/O location 
+000092,BC19,, OUT 0x29,R1   ;       Out to I/O location 
+000094,BC18,, OUT 0x28,R1   ;       Out to I/O location 
+,,,       ;--- D:\FreeTime\Biz\LED_Indication\LEDIndication\LEDIndication\Debug/.././LEDIndication.cpp 
+000096,B789,, IN R24,0x39   ;       In from I/O location 
+000098,6880,, ORI R24,0x80  ;       Logical OR with immediate 
+00009A,BF89,, OUT 0x39,R24  ;       Out to I/O location 
+00009C,9478,, SEI           ;Global Interrupt Enable 
+00009E,9210,, STS 0x0061,R1 ;       Store direct to data space 
+0000A2,9210,, STS 0x0060,R1 ;       Store direct to data space 
+0000A6,9508,, RET           ;Subroutine return 
+0000A8,921F,, PUSH R1       ;       Push register on stack 
+0000AA,920F,, PUSH R0       ;       Push register on stack 
+0000AC,B60F,, IN R0,0x3F    ;       In from I/O location 
+0000AE,920F,, PUSH R0       ;       Push register on stack 
+0000B0,2411,, CLR R1                ;Clear Register 
+0000B2,900F,, POP R0                ;Pop register from stack 
+0000B4,BE0F,, OUT 0x3F,R0   ;       Out to I/O location 
+0000B6,900F,, POP R0                ;Pop register from stack 
+,,,       ;--- D:\FreeTime\Biz\LED_Indication\LEDIndication\LEDIndication\Debug/.././LEDIndication.cpp 
+0000B8,901F,, POP R1                ;Pop register from stack 
+0000BA,9518,, RETI          ;Interrupt return 
+0000BC,921F,, PUSH R1       ;       Push register on stack 
+0000BE,920F,, PUSH R0       ;       Push register on stack 
+0000C0,B60F,, IN R0,0x3F    ;       In from I/O location 
+0000C2,920F,, PUSH R0       ;       Push register on stack 
+0000C4,2411,, CLR R1                ;Clear Register 
+0000C6,900F,, POP R0                ;Pop register from stack 
+0000C8,BE0F,, OUT 0x3F,R0   ;       Out to I/O location 
+0000CA,900F,, POP R0                ;Pop register from stack 
+0000CC,901F,, POP R1                ;Pop register from stack 
+0000CE,9518,, RETI          ;Interrupt return 
+0000D0,921F,, PUSH R1       ;       Push register on stack 
+0000D2,920F,, PUSH R0       ;       Push register on stack 
+0000D4,B60F,, IN R0,0x3F    ;       In from I/O location 
+,,,       ;--- D:\FreeTime\Biz\LED_Indication\LEDIndication\LEDIndication\Debug/.././LEDIndication.cpp 
+0000D6,920F,, PUSH R0       ;       Push register on stack 
+0000D8,2411,, CLR R1                ;Clear Register 
+0000DA,900F,, POP R0                ;Pop register from stack 
+0000DC,BE0F,, OUT 0x3F,R0   ;       Out to I/O location 
+0000DE,900F,, POP R0                ;Pop register from stack 
+0000E0,901F,, POP R1                ;Pop register from stack 
+0000E2,9518,, RETI          ;Interrupt return 
+0000E4,921F,, PUSH R1       ;       Push register on stack 
+0000E6,920F,, PUSH R0       ;       Push register on stack 
+0000E8,B60F,, IN R0,0x3F    ;       In from I/O location 
+0000EA,920F,, PUSH R0       ;       Push register on stack 
+0000EC,2411,, CLR R1                ;Clear Register 
+0000EE,900F,, POP R0                ;Pop register from stack 
+0000F0,BE0F,, OUT 0x3F,R0   ;       Out to I/O location 
+0000F2,900F,, POP R0                ;Pop register from stack 
+,,,       ;--- D:\FreeTime\Biz\LED_Indication\LEDIndication\LEDIndication\Debug/.././LEDIndication.cpp 
+0000F4,901F,, POP R1                ;Pop register from stack 
+0000F6,9518,, RETI          ;Interrupt return 
+0000F8,DFA5,, RCALL PC-0x005A;              Relative call subroutine 
+0000FA,CFFF,, RJMP PC-0x0000        ;       Relative jump 
+,,,       ;--- No source file -------------------------------------------------------------
+0000FC,94F8,, CLI           ;Global Interrupt Disable 
+,,,
+,,,

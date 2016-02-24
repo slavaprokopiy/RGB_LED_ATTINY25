@@ -1,0 +1,1139 @@
+
+LEDIndication.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000006b6  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000018  00800060  00800060  0000072a  2**0
+                  ALLOC
+  2 .comment      00000030  00000000  00000000  0000072a  2**0
+                  CONTENTS, READONLY
+  3 .debug_aranges 000000a0  00000000  00000000  0000075a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   000004e4  00000000  00000000  000007fa  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 00000172  00000000  00000000  00000cde  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   0000021c  00000000  00000000  00000e50  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  0000021c  00000000  00000000  0000106c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000035f  00000000  00000000  00001288  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    00000402  00000000  00000000  000015e7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000090  00000000  00000000  000019e9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0e c0       	rjmp	.+28     	; 0x1e <__ctors_end>
+   2:	4e c1       	rjmp	.+668    	; 0x2a0 <__vector_1>
+   4:	78 c1       	rjmp	.+752    	; 0x2f6 <__vector_2>
+   6:	19 c0       	rjmp	.+50     	; 0x3a <__bad_interrupt>
+   8:	ab c1       	rjmp	.+854    	; 0x360 <__vector_4>
+   a:	a0 c1       	rjmp	.+832    	; 0x34c <__vector_5>
+   c:	16 c0       	rjmp	.+44     	; 0x3a <__bad_interrupt>
+   e:	15 c0       	rjmp	.+42     	; 0x3a <__bad_interrupt>
+  10:	14 c0       	rjmp	.+40     	; 0x3a <__bad_interrupt>
+  12:	13 c0       	rjmp	.+38     	; 0x3a <__bad_interrupt>
+  14:	12 c0       	rjmp	.+36     	; 0x3a <__bad_interrupt>
+  16:	11 c0       	rjmp	.+34     	; 0x3a <__bad_interrupt>
+  18:	10 c0       	rjmp	.+32     	; 0x3a <__bad_interrupt>
+  1a:	0f c0       	rjmp	.+30     	; 0x3a <__bad_interrupt>
+  1c:	0e c0       	rjmp	.+28     	; 0x3a <__bad_interrupt>
+
+0000001e <__ctors_end>:
+  1e:	11 24       	eor	r1, r1
+  20:	1f be       	out	0x3f, r1	; 63
+  22:	cf ed       	ldi	r28, 0xDF	; 223
+  24:	cd bf       	out	0x3d, r28	; 61
+
+00000026 <__do_clear_bss>:
+  26:	20 e0       	ldi	r18, 0x00	; 0
+  28:	a0 e6       	ldi	r26, 0x60	; 96
+  2a:	b0 e0       	ldi	r27, 0x00	; 0
+  2c:	01 c0       	rjmp	.+2      	; 0x30 <.do_clear_bss_start>
+
+0000002e <.do_clear_bss_loop>:
+  2e:	1d 92       	st	X+, r1
+
+00000030 <.do_clear_bss_start>:
+  30:	a8 37       	cpi	r26, 0x78	; 120
+  32:	b2 07       	cpc	r27, r18
+  34:	e1 f7       	brne	.-8      	; 0x2e <.do_clear_bss_loop>
+  36:	9e d1       	rcall	.+828    	; 0x374 <main>
+  38:	3c c3       	rjmp	.+1656   	; 0x6b2 <_exit>
+
+0000003a <__bad_interrupt>:
+  3a:	e2 cf       	rjmp	.-60     	; 0x0 <__vectors>
+
+0000003c <_Z5Pausef>:
+
+uint64_t DelayTime;
+
+// Пауза
+int64_t DelayCycles;
+void Pause(float OnPeriodTime){
+  3c:	ff 92       	push	r15
+  3e:	0f 93       	push	r16
+  40:	1f 93       	push	r17
+  42:	cf 93       	push	r28
+  44:	df 93       	push	r29
+	DelayCycles = (OnPeriodTime/float(SYS_PERIOD))/400;
+  46:	2d eb       	ldi	r18, 0xBD	; 189
+  48:	37 e3       	ldi	r19, 0x37	; 55
+  4a:	46 e0       	ldi	r20, 0x06	; 6
+  4c:	54 e3       	ldi	r21, 0x34	; 52
+  4e:	16 d2       	rcall	.+1068   	; 0x47c <__divsf3>
+  50:	20 e0       	ldi	r18, 0x00	; 0
+  52:	30 e0       	ldi	r19, 0x00	; 0
+  54:	48 ec       	ldi	r20, 0xC8	; 200
+  56:	53 e4       	ldi	r21, 0x43	; 67
+  58:	11 d2       	rcall	.+1058   	; 0x47c <__divsf3>
+  5a:	78 d2       	rcall	.+1264   	; 0x54c <__fixsfdi>
+  5c:	20 93 66 00 	sts	0x0066, r18
+  60:	30 93 67 00 	sts	0x0067, r19
+  64:	40 93 68 00 	sts	0x0068, r20
+  68:	50 93 69 00 	sts	0x0069, r21
+  6c:	60 93 6a 00 	sts	0x006A, r22
+  70:	70 93 6b 00 	sts	0x006B, r23
+  74:	80 93 6c 00 	sts	0x006C, r24
+  78:	90 93 6d 00 	sts	0x006D, r25
+	while (DelayCycles > 0){DelayCycles -= 1;}  // Выдерживаем паузу
+  7c:	a0 e0       	ldi	r26, 0x00	; 0
+  7e:	0d d3       	rcall	.+1562   	; 0x69a <__cmpdi2_s8>
+  80:	b1 f0       	breq	.+44     	; 0xae <__SREG__+0x6f>
+  82:	ac f0       	brlt	.+42     	; 0xae <__SREG__+0x6f>
+  84:	af ef       	ldi	r26, 0xFF	; 255
+  86:	fd d2       	rcall	.+1530   	; 0x682 <__adddi3_s8>
+  88:	a0 e0       	ldi	r26, 0x00	; 0
+  8a:	07 d3       	rcall	.+1550   	; 0x69a <__cmpdi2_s8>
+  8c:	d9 f7       	brne	.-10     	; 0x84 <__SREG__+0x45>
+  8e:	10 92 66 00 	sts	0x0066, r1
+  92:	10 92 67 00 	sts	0x0067, r1
+  96:	10 92 68 00 	sts	0x0068, r1
+  9a:	10 92 69 00 	sts	0x0069, r1
+  9e:	10 92 6a 00 	sts	0x006A, r1
+  a2:	10 92 6b 00 	sts	0x006B, r1
+  a6:	10 92 6c 00 	sts	0x006C, r1
+  aa:	10 92 6d 00 	sts	0x006D, r1
+}
+  ae:	df 91       	pop	r29
+  b0:	cf 91       	pop	r28
+  b2:	1f 91       	pop	r17
+  b4:	0f 91       	pop	r16
+  b6:	ff 90       	pop	r15
+  b8:	08 95       	ret
+
+000000ba <_Z10SystemInitv>:
+	DDRB |= (1<<DDB2)|(1<<DDB3)|(1<<DDB4);	// Настраиваем на выход
+	DDRD |= (1<<DDD5);						// Настраиваем на выход
+#endif
+
+#ifdef tiny25
+	DDRB |= (1<<DDB0)|(1<<DDB1)|(1<<DDB4);	// Настраиваем на выход
+  ba:	87 b3       	in	r24, 0x17	; 23
+  bc:	83 61       	ori	r24, 0x13	; 19
+  be:	87 bb       	out	0x17, r24	; 23
+	
+#ifdef tiny25
+#define ButtonInterruptPinInput PINB2
+#define ChargerConnectionPinInput PINB3
+// Кнопки подключены к порту B PB2 - ButtonInterrupt(PCINT2), PB3 - ChargerConnection(PCINT3) 
+	DDRB &= ~((1<<DDB2)|(1<<DDB3)); // Настраиваем PB2 и PB3 на вход
+  c0:	87 b3       	in	r24, 0x17	; 23
+  c2:	83 7f       	andi	r24, 0xF3	; 243
+  c4:	87 bb       	out	0x17, r24	; 23
+																		(1<<ISC11)|(0<<ISC10) - спадаещему фронту*/
+	GIMSK |= (1<<INT1)|(1<<INT0);	// Разрешаем прерывания INT1 и INT0
+#endif
+
+#ifdef tiny25
+	MCUCR |= (1<<ISC01); MCUCR &= ~(1<<ISC00); GIMSK |= (1<<INT0);	// Прерывание INT0
+  c6:	85 b7       	in	r24, 0x35	; 53
+  c8:	82 60       	ori	r24, 0x02	; 2
+  ca:	85 bf       	out	0x35, r24	; 53
+  cc:	85 b7       	in	r24, 0x35	; 53
+  ce:	8e 7f       	andi	r24, 0xFE	; 254
+  d0:	85 bf       	out	0x35, r24	; 53
+  d2:	8b b7       	in	r24, 0x3b	; 59
+  d4:	80 64       	ori	r24, 0x40	; 64
+  d6:	8b bf       	out	0x3b, r24	; 59
+	PCMSK |= (1<<PCINT3); GIMSK |= (1<<PCIE);					// Прерывание PCINT3
+  d8:	ab 9a       	sbi	0x15, 3	; 21
+  da:	8b b7       	in	r24, 0x3b	; 59
+  dc:	80 62       	ori	r24, 0x20	; 32
+  de:	8b bf       	out	0x3b, r24	; 59
+#endif
+
+	sei();				// Разрешение прерываний
+  e0:	78 94       	sei
+
+	Status = STATUS_OFF;	// Сброс состояния устройства
+  e2:	10 92 77 00 	sts	0x0077, r1
+  e6:	10 92 76 00 	sts	0x0076, r1
+  ea:	08 95       	ret
+
+000000ec <_Z9LEDPinsOnv>:
+
+// =========================================================
+// Функции управления светодиодами =========================
+// Включение выводов управления светодиодами
+void LEDPinsOn(void){
+	OC0AModeClearOnCompareMatch;	// Режим работы вывода OC0A
+  ec:	8a b5       	in	r24, 0x2a	; 42
+  ee:	80 68       	ori	r24, 0x80	; 128
+  f0:	8a bd       	out	0x2a, r24	; 42
+  f2:	8a b5       	in	r24, 0x2a	; 42
+  f4:	8f 7b       	andi	r24, 0xBF	; 191
+  f6:	8a bd       	out	0x2a, r24	; 42
+	OC0BModeClearOnCompareMatch;	// Режим работы вывода OC0B
+  f8:	8a b5       	in	r24, 0x2a	; 42
+  fa:	80 62       	ori	r24, 0x20	; 32
+  fc:	8a bd       	out	0x2a, r24	; 42
+  fe:	8a b5       	in	r24, 0x2a	; 42
+ 100:	8f 7e       	andi	r24, 0xEF	; 239
+ 102:	8a bd       	out	0x2a, r24	; 42
+	OC1BModeClearOnCompareMatch;	// Режим работы вывода OC1B
+ 104:	8c b5       	in	r24, 0x2c	; 44
+ 106:	80 62       	ori	r24, 0x20	; 32
+ 108:	8c bd       	out	0x2c, r24	; 44
+ 10a:	8c b5       	in	r24, 0x2c	; 44
+ 10c:	8c bd       	out	0x2c, r24	; 44
+	// Переводим таймеры в режим работы FastPWM
+	Timer0ModeFastPWM;
+ 10e:	8a b5       	in	r24, 0x2a	; 42
+ 110:	83 60       	ori	r24, 0x03	; 3
+ 112:	8a bd       	out	0x2a, r24	; 42
+	Timer1ModeFastPWM;
+ 114:	80 b7       	in	r24, 0x30	; 48
+ 116:	80 64       	ori	r24, 0x40	; 64
+ 118:	80 bf       	out	0x30, r24	; 48
+ 11a:	8c b5       	in	r24, 0x2c	; 44
+ 11c:	80 64       	ori	r24, 0x40	; 64
+ 11e:	8c bd       	out	0x2c, r24	; 44
+	Timer0CLKOn;	// Включаем тактирование Таймера0
+ 120:	83 b7       	in	r24, 0x33	; 51
+ 122:	81 60       	ori	r24, 0x01	; 1
+ 124:	83 bf       	out	0x33, r24	; 51
+ 126:	83 b7       	in	r24, 0x33	; 51
+ 128:	89 7f       	andi	r24, 0xF9	; 249
+ 12a:	83 bf       	out	0x33, r24	; 51
+	Timer1CLKOn;	// Включаем тактирование Таймера1
+ 12c:	87 b5       	in	r24, 0x27	; 39
+ 12e:	8b 7f       	andi	r24, 0xFB	; 251
+ 130:	87 bd       	out	0x27, r24	; 39
+ 132:	80 b7       	in	r24, 0x30	; 48
+ 134:	81 60       	ori	r24, 0x01	; 1
+ 136:	80 bf       	out	0x30, r24	; 48
+ 138:	80 b7       	in	r24, 0x30	; 48
+ 13a:	81 7f       	andi	r24, 0xF1	; 241
+ 13c:	80 bf       	out	0x30, r24	; 48
+ 13e:	08 95       	ret
+
+00000140 <_Z10LEDPinsOffv>:
+}
+
+// Отключение выводов управления светодиодами
+void LEDPinsOff(void){
+	//Переводим таймеры в нормальный режим работы
+	Timer0ModeNormal;	// Режим работы таймера0
+ 140:	8a b5       	in	r24, 0x2a	; 42
+ 142:	8c 7f       	andi	r24, 0xFC	; 252
+ 144:	8a bd       	out	0x2a, r24	; 42
+	Timer1ModeNormal;	// Режим работы таймера1
+ 146:	80 b7       	in	r24, 0x30	; 48
+ 148:	8f 7b       	andi	r24, 0xBF	; 191
+ 14a:	80 bf       	out	0x30, r24	; 48
+ 14c:	8c b5       	in	r24, 0x2c	; 44
+ 14e:	8f 7b       	andi	r24, 0xBF	; 191
+ 150:	8c bd       	out	0x2c, r24	; 44
+	Timer0CLKOff;
+ 152:	83 b7       	in	r24, 0x33	; 51
+ 154:	88 7f       	andi	r24, 0xF8	; 248
+ 156:	83 bf       	out	0x33, r24	; 51
+	Timer1CLKOff;
+ 158:	80 b7       	in	r24, 0x30	; 48
+ 15a:	80 7f       	andi	r24, 0xF0	; 240
+ 15c:	80 bf       	out	0x30, r24	; 48
+	OC0AModeNormal;	// Режим работы вывода OC0A
+ 15e:	8a b5       	in	r24, 0x2a	; 42
+ 160:	8f 73       	andi	r24, 0x3F	; 63
+ 162:	8a bd       	out	0x2a, r24	; 42
+	OC0BModeNormal;	// Режим работы вывода OC0B
+ 164:	8a b5       	in	r24, 0x2a	; 42
+ 166:	8f 7c       	andi	r24, 0xCF	; 207
+ 168:	8a bd       	out	0x2a, r24	; 42
+	OC1AModeNormal;	// Режим работы вывода OC1A
+ 16a:	80 b7       	in	r24, 0x30	; 48
+ 16c:	8f 7c       	andi	r24, 0xCF	; 207
+ 16e:	80 bf       	out	0x30, r24	; 48
+	// (0<<COM0A1)|(0<<COM0A0) - Normal port operation, OC0A disconnected.
+	OC1BModeNormal;	// Режим работы вывода OC1B
+ 170:	8c b5       	in	r24, 0x2c	; 44
+ 172:	8f 7c       	andi	r24, 0xCF	; 207
+ 174:	8c bd       	out	0x2c, r24	; 44
+	LedPortReset;	// Сбрасываем в "0"
+ 176:	88 b3       	in	r24, 0x18	; 24
+ 178:	8c 7e       	andi	r24, 0xEC	; 236
+ 17a:	88 bb       	out	0x18, r24	; 24
+	CountersReset;
+ 17c:	8f ef       	ldi	r24, 0xFF	; 255
+ 17e:	82 bf       	out	0x32, r24	; 50
+ 180:	8f bd       	out	0x2f, r24	; 47
+ 182:	08 95       	ret
+
+00000184 <_Z11SetColorPWMl>:
+}
+
+// Установка регистров сравнения ШИМ в соответствии с указанным цветом
+void SetColorPWM(int32_t Color){
+ 184:	0f 93       	push	r16
+ 186:	1f 93       	push	r17
+	//Переводим таймеры в нормальный режим работы, для установки значений регистров сравнения
+	Timer0ModeNormal;
+ 188:	2a b5       	in	r18, 0x2a	; 42
+ 18a:	2c 7f       	andi	r18, 0xFC	; 252
+ 18c:	2a bd       	out	0x2a, r18	; 42
+	Timer1ModeNormal;
+ 18e:	20 b7       	in	r18, 0x30	; 48
+ 190:	2f 7b       	andi	r18, 0xBF	; 191
+ 192:	20 bf       	out	0x30, r18	; 48
+ 194:	2c b5       	in	r18, 0x2c	; 44
+ 196:	2f 7b       	andi	r18, 0xBF	; 191
+ 198:	2c bd       	out	0x2c, r18	; 44
+	PWM_RED		= int((Color>>16)	& 0x0000FF);
+ 19a:	8c 01       	movw	r16, r24
+ 19c:	33 27       	eor	r19, r19
+ 19e:	17 fd       	sbrc	r17, 7
+ 1a0:	30 95       	com	r19
+ 1a2:	23 2f       	mov	r18, r19
+ 1a4:	0b bd       	out	0x2b, r16	; 43
+	PWM_GREEN	= int((Color>>8)	& 0x0000FF);
+ 1a6:	07 2f       	mov	r16, r23
+ 1a8:	18 2f       	mov	r17, r24
+ 1aa:	29 2f       	mov	r18, r25
+ 1ac:	33 27       	eor	r19, r19
+ 1ae:	27 fd       	sbrc	r18, 7
+ 1b0:	3a 95       	dec	r19
+ 1b2:	09 bd       	out	0x29, r16	; 41
+	PWM_BLUE	= int(Color			& 0x0000FF);
+ 1b4:	68 bd       	out	0x28, r22	; 40
+	Timer0ModeFastPWM;
+ 1b6:	8a b5       	in	r24, 0x2a	; 42
+ 1b8:	83 60       	ori	r24, 0x03	; 3
+ 1ba:	8a bd       	out	0x2a, r24	; 42
+	Timer1ModeFastPWM;
+ 1bc:	80 b7       	in	r24, 0x30	; 48
+ 1be:	80 64       	ori	r24, 0x40	; 64
+ 1c0:	80 bf       	out	0x30, r24	; 48
+ 1c2:	8c b5       	in	r24, 0x2c	; 44
+ 1c4:	80 64       	ori	r24, 0x40	; 64
+ 1c6:	8c bd       	out	0x2c, r24	; 44
+}
+ 1c8:	1f 91       	pop	r17
+ 1ca:	0f 91       	pop	r16
+ 1cc:	08 95       	ret
+
+000001ce <_Z8LedPulself>:
+
+
+// Включение цвета на указанное время
+void LedPulse(int32_t Color, float OnPeriodTime){ // Функция однократного включения-отключения светодиода с указанием времени свечения
+ 1ce:	8f 92       	push	r8
+ 1d0:	9f 92       	push	r9
+ 1d2:	af 92       	push	r10
+ 1d4:	bf 92       	push	r11
+ 1d6:	cf 92       	push	r12
+ 1d8:	df 92       	push	r13
+ 1da:	ef 92       	push	r14
+ 1dc:	ff 92       	push	r15
+ 1de:	4b 01       	movw	r8, r22
+ 1e0:	5c 01       	movw	r10, r24
+ 1e2:	69 01       	movw	r12, r18
+ 1e4:	7a 01       	movw	r14, r20
+	
+	LEDPinsOff();		// Отключаем светодиоды
+ 1e6:	ac df       	rcall	.-168    	; 0x140 <_Z10LEDPinsOffv>
+	SetColorPWM(Color);	// Настраиваем ШИМ на заданный цвет
+ 1e8:	c5 01       	movw	r24, r10
+ 1ea:	b4 01       	movw	r22, r8
+ 1ec:	cb df       	rcall	.-106    	; 0x184 <_Z11SetColorPWMl>
+	LEDPinsOn();		// Включаем светодиоды
+ 1ee:	7e df       	rcall	.-260    	; 0xec <_Z9LEDPinsOnv>
+	Pause(OnPeriodTime);
+ 1f0:	c7 01       	movw	r24, r14
+ 1f2:	b6 01       	movw	r22, r12
+ 1f4:	23 df       	rcall	.-442    	; 0x3c <_Z5Pausef>
+	LEDPinsOff();		// Отключаем светодиоды
+ 1f6:	a4 df       	rcall	.-184    	; 0x140 <_Z10LEDPinsOffv>
+}
+ 1f8:	ff 90       	pop	r15
+ 1fa:	ef 90       	pop	r14
+ 1fc:	df 90       	pop	r13
+ 1fe:	cf 90       	pop	r12
+ 200:	bf 90       	pop	r11
+ 202:	af 90       	pop	r10
+ 204:	9f 90       	pop	r9
+ 206:	8f 90       	pop	r8
+ 208:	08 95       	ret
+
+0000020a <_Z15TurningDeviceOnv>:
+
+// Функции включения/отключения =============================
+void TurningDeviceOn(void){ // Действия при включении устройства
+	
+	for(int i=0;i<2;i++){ 			// Счетчик морганий
+		LedPulse(COLOR_GREEN,1000);	// Подаем импульс зеленого цвета
+ 20a:	20 e0       	ldi	r18, 0x00	; 0
+ 20c:	30 e0       	ldi	r19, 0x00	; 0
+ 20e:	4a e7       	ldi	r20, 0x7A	; 122
+ 210:	54 e4       	ldi	r21, 0x44	; 68
+ 212:	6b e0       	ldi	r22, 0x0B	; 11
+ 214:	77 ea       	ldi	r23, 0xA7	; 167
+ 216:	84 e6       	ldi	r24, 0x64	; 100
+ 218:	90 e0       	ldi	r25, 0x00	; 0
+ 21a:	d9 df       	rcall	.-78     	; 0x1ce <_Z8LedPulself>
+ 21c:	80 e0       	ldi	r24, 0x00	; 0
+ 21e:	90 e0       	ldi	r25, 0x00	; 0
+ 220:	01 96       	adiw	r24, 0x01	; 1
+		DelayTime = 1000;				
+		while (DelayTime > 0){DelayTime--;}  // Выдерживаем паузу
+ 222:	88 3e       	cpi	r24, 0xE8	; 232
+ 224:	23 e0       	ldi	r18, 0x03	; 3
+ 226:	92 07       	cpc	r25, r18
+ 228:	d9 f7       	brne	.-10     	; 0x220 <_Z15TurningDeviceOnv+0x16>
+ 22a:	10 92 6e 00 	sts	0x006E, r1
+ 22e:	10 92 6f 00 	sts	0x006F, r1
+ 232:	10 92 70 00 	sts	0x0070, r1
+ 236:	10 92 71 00 	sts	0x0071, r1
+ 23a:	10 92 72 00 	sts	0x0072, r1
+ 23e:	10 92 73 00 	sts	0x0073, r1
+ 242:	10 92 74 00 	sts	0x0074, r1
+ 246:	10 92 75 00 	sts	0x0075, r1
+
+// Функции включения/отключения =============================
+void TurningDeviceOn(void){ // Действия при включении устройства
+	
+	for(int i=0;i<2;i++){ 			// Счетчик морганий
+		LedPulse(COLOR_GREEN,1000);	// Подаем импульс зеленого цвета
+ 24a:	20 e0       	ldi	r18, 0x00	; 0
+ 24c:	30 e0       	ldi	r19, 0x00	; 0
+ 24e:	4a e7       	ldi	r20, 0x7A	; 122
+ 250:	54 e4       	ldi	r21, 0x44	; 68
+ 252:	6b e0       	ldi	r22, 0x0B	; 11
+ 254:	77 ea       	ldi	r23, 0xA7	; 167
+ 256:	84 e6       	ldi	r24, 0x64	; 100
+ 258:	90 e0       	ldi	r25, 0x00	; 0
+ 25a:	b9 df       	rcall	.-142    	; 0x1ce <_Z8LedPulself>
+ 25c:	80 e0       	ldi	r24, 0x00	; 0
+ 25e:	90 e0       	ldi	r25, 0x00	; 0
+ 260:	01 96       	adiw	r24, 0x01	; 1
+		DelayTime = 1000;				
+		while (DelayTime > 0){DelayTime--;}  // Выдерживаем паузу
+ 262:	88 3e       	cpi	r24, 0xE8	; 232
+ 264:	23 e0       	ldi	r18, 0x03	; 3
+ 266:	92 07       	cpc	r25, r18
+ 268:	d9 f7       	brne	.-10     	; 0x260 <_Z15TurningDeviceOnv+0x56>
+ 26a:	10 92 6e 00 	sts	0x006E, r1
+ 26e:	10 92 6f 00 	sts	0x006F, r1
+ 272:	10 92 70 00 	sts	0x0070, r1
+ 276:	10 92 71 00 	sts	0x0071, r1
+ 27a:	10 92 72 00 	sts	0x0072, r1
+ 27e:	10 92 73 00 	sts	0x0073, r1
+ 282:	10 92 74 00 	sts	0x0074, r1
+ 286:	10 92 75 00 	sts	0x0075, r1
+ 28a:	08 95       	ret
+
+0000028c <_Z16TurningDeviceOffv>:
+	}
+	//!d LedSmooth(COLOR_ORANGE, 2000);			// Плавное мигание оранжевым цветом
+	
+}
+void TurningDeviceOff(void){ // Действия при выключении устройства
+	LedPulse(COLOR_RED,2000);// Подаем импульс красного цвета
+ 28c:	20 e0       	ldi	r18, 0x00	; 0
+ 28e:	30 e0       	ldi	r19, 0x00	; 0
+ 290:	4a ef       	ldi	r20, 0xFA	; 250
+ 292:	54 e4       	ldi	r21, 0x44	; 68
+ 294:	6b e2       	ldi	r22, 0x2B	; 43
+ 296:	70 e0       	ldi	r23, 0x00	; 0
+ 298:	84 ee       	ldi	r24, 0xE4	; 228
+ 29a:	90 e0       	ldi	r25, 0x00	; 0
+ 29c:	98 df       	rcall	.-208    	; 0x1ce <_Z8LedPulself>
+ 29e:	08 95       	ret
+
+000002a0 <__vector_1>:
+#endif
+
+#ifdef tiny25
+// Прерывание PCINT2 - ButtonInterrupt
+int ButtonInterruptFlag = 0;
+ISR(INT0_vect){
+ 2a0:	1f 92       	push	r1
+ 2a2:	0f 92       	push	r0
+ 2a4:	0f b6       	in	r0, 0x3f	; 63
+ 2a6:	0f 92       	push	r0
+ 2a8:	11 24       	eor	r1, r1
+ 2aa:	2f 93       	push	r18
+ 2ac:	3f 93       	push	r19
+ 2ae:	4f 93       	push	r20
+ 2b0:	5f 93       	push	r21
+ 2b2:	6f 93       	push	r22
+ 2b4:	7f 93       	push	r23
+ 2b6:	8f 93       	push	r24
+ 2b8:	9f 93       	push	r25
+ 2ba:	af 93       	push	r26
+ 2bc:	bf 93       	push	r27
+ 2be:	ef 93       	push	r30
+ 2c0:	ff 93       	push	r31
+	LedPulse(COLOR_RED,1);
+ 2c2:	20 e0       	ldi	r18, 0x00	; 0
+ 2c4:	30 e0       	ldi	r19, 0x00	; 0
+ 2c6:	40 e8       	ldi	r20, 0x80	; 128
+ 2c8:	5f e3       	ldi	r21, 0x3F	; 63
+ 2ca:	6b e2       	ldi	r22, 0x2B	; 43
+ 2cc:	70 e0       	ldi	r23, 0x00	; 0
+ 2ce:	84 ee       	ldi	r24, 0xE4	; 228
+ 2d0:	90 e0       	ldi	r25, 0x00	; 0
+ 2d2:	7d df       	rcall	.-262    	; 0x1ce <_Z8LedPulself>
+	/*if(((PINB & (1<<ButtonInterruptPinInput))>>ButtonInterruptPinInput) == 0){// Если пин в нижнем уровне
+		ButtonInterruptFlag = 1;// Ставим флаг прерывания
+		Pause(0.3);	// Debounce-задержка 0.3 секунды
+	}
+	else{ButtonInterruptFlag = 0;} // Сбрасываем флаг прерывания*/
+}
+ 2d4:	ff 91       	pop	r31
+ 2d6:	ef 91       	pop	r30
+ 2d8:	bf 91       	pop	r27
+ 2da:	af 91       	pop	r26
+ 2dc:	9f 91       	pop	r25
+ 2de:	8f 91       	pop	r24
+ 2e0:	7f 91       	pop	r23
+ 2e2:	6f 91       	pop	r22
+ 2e4:	5f 91       	pop	r21
+ 2e6:	4f 91       	pop	r20
+ 2e8:	3f 91       	pop	r19
+ 2ea:	2f 91       	pop	r18
+ 2ec:	0f 90       	pop	r0
+ 2ee:	0f be       	out	0x3f, r0	; 63
+ 2f0:	0f 90       	pop	r0
+ 2f2:	1f 90       	pop	r1
+ 2f4:	18 95       	reti
+
+000002f6 <__vector_2>:
+// Прерывание PCINT3 - ChargerConnection
+ISR(PCINT0_vect){
+ 2f6:	1f 92       	push	r1
+ 2f8:	0f 92       	push	r0
+ 2fa:	0f b6       	in	r0, 0x3f	; 63
+ 2fc:	0f 92       	push	r0
+ 2fe:	11 24       	eor	r1, r1
+ 300:	2f 93       	push	r18
+ 302:	3f 93       	push	r19
+ 304:	4f 93       	push	r20
+ 306:	5f 93       	push	r21
+ 308:	6f 93       	push	r22
+ 30a:	7f 93       	push	r23
+ 30c:	8f 93       	push	r24
+ 30e:	9f 93       	push	r25
+ 310:	af 93       	push	r26
+ 312:	bf 93       	push	r27
+ 314:	ef 93       	push	r30
+ 316:	ff 93       	push	r31
+	LedPulse(COLOR_GREEN,5);
+ 318:	20 e0       	ldi	r18, 0x00	; 0
+ 31a:	30 e0       	ldi	r19, 0x00	; 0
+ 31c:	40 ea       	ldi	r20, 0xA0	; 160
+ 31e:	50 e4       	ldi	r21, 0x40	; 64
+ 320:	6b e0       	ldi	r22, 0x0B	; 11
+ 322:	77 ea       	ldi	r23, 0xA7	; 167
+ 324:	84 e6       	ldi	r24, 0x64	; 100
+ 326:	90 e0       	ldi	r25, 0x00	; 0
+ 328:	52 df       	rcall	.-348    	; 0x1ce <_Z8LedPulself>
+	//!t //Перенастраиваем прерывание на спадающий фронт
+	
+	//Прерывание по спадающему фронту
+	//!d Status = STATUS_CHARGER_OFF;
+	//!t //Перенастраиваем прерывание на нарастающий фронт*/
+}
+ 32a:	ff 91       	pop	r31
+ 32c:	ef 91       	pop	r30
+ 32e:	bf 91       	pop	r27
+ 330:	af 91       	pop	r26
+ 332:	9f 91       	pop	r25
+ 334:	8f 91       	pop	r24
+ 336:	7f 91       	pop	r23
+ 338:	6f 91       	pop	r22
+ 33a:	5f 91       	pop	r21
+ 33c:	4f 91       	pop	r20
+ 33e:	3f 91       	pop	r19
+ 340:	2f 91       	pop	r18
+ 342:	0f 90       	pop	r0
+ 344:	0f be       	out	0x3f, r0	; 63
+ 346:	0f 90       	pop	r0
+ 348:	1f 90       	pop	r1
+ 34a:	18 95       	reti
+
+0000034c <__vector_5>:
+#endif
+
+// Прерывание переполнения таймера0
+ISR (TIMER0_OVF_vect){	
+ 34c:	1f 92       	push	r1
+ 34e:	0f 92       	push	r0
+ 350:	0f b6       	in	r0, 0x3f	; 63
+ 352:	0f 92       	push	r0
+ 354:	11 24       	eor	r1, r1
+	/*cli();
+	OCR0A += 1; //Регистр сравнения A
+	OCR0B += 1; //Регистр сравнения B
+	sei();*/
+}
+ 356:	0f 90       	pop	r0
+ 358:	0f be       	out	0x3f, r0	; 63
+ 35a:	0f 90       	pop	r0
+ 35c:	1f 90       	pop	r1
+ 35e:	18 95       	reti
+
+00000360 <__vector_4>:
+// Прерывание переполнения таймера1
+ISR (TIMER1_OVF_vect){ 
+ 360:	1f 92       	push	r1
+ 362:	0f 92       	push	r0
+ 364:	0f b6       	in	r0, 0x3f	; 63
+ 366:	0f 92       	push	r0
+ 368:	11 24       	eor	r1, r1
+	OCR1A += 1; //Регистр сравнения A
+	if(OCR1A>0xFF){OCR1A = 0;}
+	OCR1B += 1; //Регистр сравнения B
+	if(OCR1B>0xFF){OCR1B = 0;}
+	sei();*/
+}
+ 36a:	0f 90       	pop	r0
+ 36c:	0f be       	out	0x3f, r0	; 63
+ 36e:	0f 90       	pop	r0
+ 370:	1f 90       	pop	r1
+ 372:	18 95       	reti
+
+00000374 <main>:
+
+uint32_t ButtonDelayCounter = 0;
+#define A 10000
+// Главный цикл =============================================
+int main(void){
+	SystemInit();
+ 374:	a2 de       	rcall	.-700    	; 0xba <_Z10SystemInitv>
+		Pause(2);*/
+		if(ButtonInterruptFlag){ // Если было прерывание по кнопке
+			ButtonDelayCounter++;	// Отсчитываем задержку
+									// Если задержка выдержана
+			if(ButtonDelayCounter == A){
+				ButtonDelayCounter = 0;
+ 376:	a1 2c       	mov	r10, r1
+ 378:	b1 2c       	mov	r11, r1
+ 37a:	c1 2c       	mov	r12, r1
+ 37c:	d1 2c       	mov	r13, r1
+			;
+			break;
+			
+			case STATUS_TURNING_ON:	// Если инициировано включение
+			TurningDeviceOn();	// Реализуем включение
+			Status = STATUS_ON;	// Изменяем флаг состояния устройства
+ 37e:	01 e0       	ldi	r16, 0x01	; 1
+ 380:	10 e0       	ldi	r17, 0x00	; 0
+				//!t Status = ?
+			break;
+
+			case STATUS_CHARGER_OFF:	// Отключена зарядка
+				ChargerDisConnection();
+				Status = STATUS_TURNING_OFF;
+ 382:	c3 e0       	ldi	r28, 0x03	; 3
+ 384:	d0 e0       	ldi	r29, 0x00	; 0
+									// Если задержка выдержана
+			if(ButtonDelayCounter == A){
+				ButtonDelayCounter = 0;
+				switch(Status){
+					case STATUS_OFF:				// Если находимся в выключенном состоянии
+					Status = STATUS_TURNING_ON;	// Включаемся
+ 386:	68 94       	set
+ 388:	ee 24       	eor	r14, r14
+ 38a:	e1 f8       	bld	r14, 1
+ 38c:	f1 2c       	mov	r15, r1
+		Pause(2);*/
+		if(ButtonInterruptFlag){ // Если было прерывание по кнопке
+			ButtonDelayCounter++;	// Отсчитываем задержку
+									// Если задержка выдержана
+			if(ButtonDelayCounter == A){
+				ButtonDelayCounter = 0;
+ 38e:	6a 2c       	mov	r6, r10
+ 390:	7b 2c       	mov	r7, r11
+ 392:	8c 2c       	mov	r8, r12
+ 394:	9d 2c       	mov	r9, r13
+		LedPulse(COLOR_RED,1);
+		Pause(2);
+		
+		LedPulse(COLOR_ORANGE,0.5);
+		Pause(2);*/
+		if(ButtonInterruptFlag){ // Если было прерывание по кнопке
+ 396:	20 91 64 00 	lds	r18, 0x0064
+ 39a:	30 91 65 00 	lds	r19, 0x0065
+			ButtonDelayCounter++;	// Отсчитываем задержку
+									// Если задержка выдержана
+			if(ButtonDelayCounter == A){
+				ButtonDelayCounter = 0;
+				switch(Status){
+ 39e:	80 91 76 00 	lds	r24, 0x0076
+ 3a2:	90 91 77 00 	lds	r25, 0x0077
+ 3a6:	40 91 60 00 	lds	r20, 0x0060
+ 3aa:	50 91 61 00 	lds	r21, 0x0061
+ 3ae:	60 91 62 00 	lds	r22, 0x0062
+ 3b2:	70 91 63 00 	lds	r23, 0x0063
+		LedPulse(COLOR_RED,1);
+		Pause(2);
+		
+		LedPulse(COLOR_ORANGE,0.5);
+		Pause(2);*/
+		if(ButtonInterruptFlag){ // Если было прерывание по кнопке
+ 3b6:	21 15       	cp	r18, r1
+ 3b8:	31 05       	cpc	r19, r1
+ 3ba:	71 f1       	breq	.+92     	; 0x418 <main+0xa4>
+			ButtonDelayCounter++;	// Отсчитываем задержку
+ 3bc:	4f 5f       	subi	r20, 0xFF	; 255
+ 3be:	5f 4f       	sbci	r21, 0xFF	; 255
+ 3c0:	6f 4f       	sbci	r22, 0xFF	; 255
+ 3c2:	7f 4f       	sbci	r23, 0xFF	; 255
+									// Если задержка выдержана
+			if(ButtonDelayCounter == A){
+ 3c4:	40 31       	cpi	r20, 0x10	; 16
+ 3c6:	e7 e2       	ldi	r30, 0x27	; 39
+ 3c8:	5e 07       	cpc	r21, r30
+ 3ca:	61 05       	cpc	r22, r1
+ 3cc:	71 05       	cpc	r23, r1
+ 3ce:	21 f5       	brne	.+72     	; 0x418 <main+0xa4>
+				ButtonDelayCounter = 0;
+				switch(Status){
+ 3d0:	00 97       	sbiw	r24, 0x00	; 0
+ 3d2:	21 f0       	breq	.+8      	; 0x3dc <main+0x68>
+ 3d4:	81 30       	cpi	r24, 0x01	; 1
+ 3d6:	91 05       	cpc	r25, r1
+ 3d8:	71 f0       	breq	.+28     	; 0x3f6 <main+0x82>
+ 3da:	1a c0       	rjmp	.+52     	; 0x410 <main+0x9c>
+ 3dc:	a0 92 60 00 	sts	0x0060, r10
+ 3e0:	b0 92 61 00 	sts	0x0061, r11
+ 3e4:	c0 92 62 00 	sts	0x0062, r12
+ 3e8:	d0 92 63 00 	sts	0x0063, r13
+					case STATUS_OFF:				// Если находимся в выключенном состоянии
+					Status = STATUS_TURNING_ON;	// Включаемся
+ 3ec:	f0 92 77 00 	sts	0x0077, r15
+ 3f0:	e0 92 76 00 	sts	0x0076, r14
+ 3f4:	22 c0       	rjmp	.+68     	; 0x43a <main+0xc6>
+ 3f6:	a0 92 60 00 	sts	0x0060, r10
+ 3fa:	b0 92 61 00 	sts	0x0061, r11
+ 3fe:	c0 92 62 00 	sts	0x0062, r12
+ 402:	d0 92 63 00 	sts	0x0063, r13
+					break;
+					
+					case STATUS_ON:					// Если находимся во включенном состоянии
+					Status = STATUS_TURNING_OFF;// Выключаемся
+ 406:	d0 93 77 00 	sts	0x0077, r29
+ 40a:	c0 93 76 00 	sts	0x0076, r28
+ 40e:	23 c0       	rjmp	.+70     	; 0x456 <main+0xe2>
+		Pause(2);*/
+		if(ButtonInterruptFlag){ // Если было прерывание по кнопке
+			ButtonDelayCounter++;	// Отсчитываем задержку
+									// Если задержка выдержана
+			if(ButtonDelayCounter == A){
+				ButtonDelayCounter = 0;
+ 410:	46 2d       	mov	r20, r6
+ 412:	57 2d       	mov	r21, r7
+ 414:	68 2d       	mov	r22, r8
+ 416:	79 2d       	mov	r23, r9
+					Status = STATUS_TURNING_OFF;// Выключаемся
+					break;
+				}
+			}
+		}
+		switch(Status){			// Проверяем состояние устройства
+ 418:	83 30       	cpi	r24, 0x03	; 3
+ 41a:	91 05       	cpc	r25, r1
+ 41c:	a1 f0       	breq	.+40     	; 0x446 <main+0xd2>
+ 41e:	85 30       	cpi	r24, 0x05	; 5
+ 420:	91 05       	cpc	r25, r1
+ 422:	f9 f0       	breq	.+62     	; 0x462 <main+0xee>
+ 424:	82 30       	cpi	r24, 0x02	; 2
+ 426:	91 05       	cpc	r25, r1
+ 428:	31 f6       	brne	.-116    	; 0x3b6 <main+0x42>
+ 42a:	40 93 60 00 	sts	0x0060, r20
+ 42e:	50 93 61 00 	sts	0x0061, r21
+ 432:	60 93 62 00 	sts	0x0062, r22
+ 436:	70 93 63 00 	sts	0x0063, r23
+			case STATUS_OFF:	// Если отключено
+			;
+			break;
+			
+			case STATUS_TURNING_ON:	// Если инициировано включение
+			TurningDeviceOn();	// Реализуем включение
+ 43a:	e7 de       	rcall	.-562    	; 0x20a <_Z15TurningDeviceOnv>
+			Status = STATUS_ON;	// Изменяем флаг состояния устройства
+ 43c:	10 93 77 00 	sts	0x0077, r17
+ 440:	00 93 76 00 	sts	0x0076, r16
+			break;
+ 444:	a8 cf       	rjmp	.-176    	; 0x396 <main+0x22>
+ 446:	40 93 60 00 	sts	0x0060, r20
+ 44a:	50 93 61 00 	sts	0x0061, r21
+ 44e:	60 93 62 00 	sts	0x0062, r22
+ 452:	70 93 63 00 	sts	0x0063, r23
+
+			case STATUS_ON:		// Если включено
+			break;
+
+			case STATUS_TURNING_OFF:	// Если инициировано отключение
+			TurningDeviceOff();			// Реализуем отключение
+ 456:	1a df       	rcall	.-460    	; 0x28c <_Z16TurningDeviceOffv>
+			Status = STATUS_OFF;		// Изменяем флаг состояния устройства
+ 458:	10 92 77 00 	sts	0x0077, r1
+ 45c:	10 92 76 00 	sts	0x0076, r1
+			;
+			break;
+ 460:	9a cf       	rjmp	.-204    	; 0x396 <main+0x22>
+ 462:	40 93 60 00 	sts	0x0060, r20
+ 466:	50 93 61 00 	sts	0x0061, r21
+ 46a:	60 93 62 00 	sts	0x0062, r22
+ 46e:	70 93 63 00 	sts	0x0063, r23
+				//!t Status = ?
+			break;
+
+			case STATUS_CHARGER_OFF:	// Отключена зарядка
+				ChargerDisConnection();
+				Status = STATUS_TURNING_OFF;
+ 472:	d0 93 77 00 	sts	0x0077, r29
+ 476:	c0 93 76 00 	sts	0x0076, r28
+			break;
+ 47a:	8d cf       	rjmp	.-230    	; 0x396 <main+0x22>
+
+0000047c <__divsf3>:
+ 47c:	0c d0       	rcall	.+24     	; 0x496 <__divsf3x>
+ 47e:	c7 c0       	rjmp	.+398    	; 0x60e <__fp_round>
+ 480:	bf d0       	rcall	.+382    	; 0x600 <__fp_pscB>
+ 482:	40 f0       	brcs	.+16     	; 0x494 <__divsf3+0x18>
+ 484:	b6 d0       	rcall	.+364    	; 0x5f2 <__fp_pscA>
+ 486:	30 f0       	brcs	.+12     	; 0x494 <__divsf3+0x18>
+ 488:	21 f4       	brne	.+8      	; 0x492 <__divsf3+0x16>
+ 48a:	5f 3f       	cpi	r21, 0xFF	; 255
+ 48c:	19 f0       	breq	.+6      	; 0x494 <__divsf3+0x18>
+ 48e:	98 c0       	rjmp	.+304    	; 0x5c0 <__fp_inf>
+ 490:	51 11       	cpse	r21, r1
+ 492:	f1 c0       	rjmp	.+482    	; 0x676 <__fp_szero>
+ 494:	9b c0       	rjmp	.+310    	; 0x5cc <__fp_nan>
+
+00000496 <__divsf3x>:
+ 496:	cc d0       	rcall	.+408    	; 0x630 <__fp_split3>
+ 498:	98 f3       	brcs	.-26     	; 0x480 <__divsf3+0x4>
+
+0000049a <__divsf3_pse>:
+ 49a:	99 23       	and	r25, r25
+ 49c:	c9 f3       	breq	.-14     	; 0x490 <__divsf3+0x14>
+ 49e:	55 23       	and	r21, r21
+ 4a0:	b1 f3       	breq	.-20     	; 0x48e <__divsf3+0x12>
+ 4a2:	95 1b       	sub	r25, r21
+ 4a4:	55 0b       	sbc	r21, r21
+ 4a6:	bb 27       	eor	r27, r27
+ 4a8:	aa 27       	eor	r26, r26
+ 4aa:	62 17       	cp	r22, r18
+ 4ac:	73 07       	cpc	r23, r19
+ 4ae:	84 07       	cpc	r24, r20
+ 4b0:	38 f0       	brcs	.+14     	; 0x4c0 <__divsf3_pse+0x26>
+ 4b2:	9f 5f       	subi	r25, 0xFF	; 255
+ 4b4:	5f 4f       	sbci	r21, 0xFF	; 255
+ 4b6:	22 0f       	add	r18, r18
+ 4b8:	33 1f       	adc	r19, r19
+ 4ba:	44 1f       	adc	r20, r20
+ 4bc:	aa 1f       	adc	r26, r26
+ 4be:	a9 f3       	breq	.-22     	; 0x4aa <__divsf3_pse+0x10>
+ 4c0:	33 d0       	rcall	.+102    	; 0x528 <__divsf3_pse+0x8e>
+ 4c2:	0e 2e       	mov	r0, r30
+ 4c4:	3a f0       	brmi	.+14     	; 0x4d4 <__divsf3_pse+0x3a>
+ 4c6:	e0 e8       	ldi	r30, 0x80	; 128
+ 4c8:	30 d0       	rcall	.+96     	; 0x52a <__divsf3_pse+0x90>
+ 4ca:	91 50       	subi	r25, 0x01	; 1
+ 4cc:	50 40       	sbci	r21, 0x00	; 0
+ 4ce:	e6 95       	lsr	r30
+ 4d0:	00 1c       	adc	r0, r0
+ 4d2:	ca f7       	brpl	.-14     	; 0x4c6 <__divsf3_pse+0x2c>
+ 4d4:	29 d0       	rcall	.+82     	; 0x528 <__divsf3_pse+0x8e>
+ 4d6:	fe 2f       	mov	r31, r30
+ 4d8:	27 d0       	rcall	.+78     	; 0x528 <__divsf3_pse+0x8e>
+ 4da:	66 0f       	add	r22, r22
+ 4dc:	77 1f       	adc	r23, r23
+ 4de:	88 1f       	adc	r24, r24
+ 4e0:	bb 1f       	adc	r27, r27
+ 4e2:	26 17       	cp	r18, r22
+ 4e4:	37 07       	cpc	r19, r23
+ 4e6:	48 07       	cpc	r20, r24
+ 4e8:	ab 07       	cpc	r26, r27
+ 4ea:	b0 e8       	ldi	r27, 0x80	; 128
+ 4ec:	09 f0       	breq	.+2      	; 0x4f0 <__divsf3_pse+0x56>
+ 4ee:	bb 0b       	sbc	r27, r27
+ 4f0:	80 2d       	mov	r24, r0
+ 4f2:	bf 01       	movw	r22, r30
+ 4f4:	ff 27       	eor	r31, r31
+ 4f6:	93 58       	subi	r25, 0x83	; 131
+ 4f8:	5f 4f       	sbci	r21, 0xFF	; 255
+ 4fa:	2a f0       	brmi	.+10     	; 0x506 <__divsf3_pse+0x6c>
+ 4fc:	9e 3f       	cpi	r25, 0xFE	; 254
+ 4fe:	51 05       	cpc	r21, r1
+ 500:	68 f0       	brcs	.+26     	; 0x51c <__divsf3_pse+0x82>
+ 502:	5e c0       	rjmp	.+188    	; 0x5c0 <__fp_inf>
+ 504:	b8 c0       	rjmp	.+368    	; 0x676 <__fp_szero>
+ 506:	5f 3f       	cpi	r21, 0xFF	; 255
+ 508:	ec f3       	brlt	.-6      	; 0x504 <__divsf3_pse+0x6a>
+ 50a:	98 3e       	cpi	r25, 0xE8	; 232
+ 50c:	dc f3       	brlt	.-10     	; 0x504 <__divsf3_pse+0x6a>
+ 50e:	86 95       	lsr	r24
+ 510:	77 95       	ror	r23
+ 512:	67 95       	ror	r22
+ 514:	b7 95       	ror	r27
+ 516:	f7 95       	ror	r31
+ 518:	9f 5f       	subi	r25, 0xFF	; 255
+ 51a:	c9 f7       	brne	.-14     	; 0x50e <__divsf3_pse+0x74>
+ 51c:	88 0f       	add	r24, r24
+ 51e:	91 1d       	adc	r25, r1
+ 520:	96 95       	lsr	r25
+ 522:	87 95       	ror	r24
+ 524:	97 f9       	bld	r25, 7
+ 526:	08 95       	ret
+ 528:	e1 e0       	ldi	r30, 0x01	; 1
+ 52a:	66 0f       	add	r22, r22
+ 52c:	77 1f       	adc	r23, r23
+ 52e:	88 1f       	adc	r24, r24
+ 530:	bb 1f       	adc	r27, r27
+ 532:	62 17       	cp	r22, r18
+ 534:	73 07       	cpc	r23, r19
+ 536:	84 07       	cpc	r24, r20
+ 538:	ba 07       	cpc	r27, r26
+ 53a:	20 f0       	brcs	.+8      	; 0x544 <__divsf3_pse+0xaa>
+ 53c:	62 1b       	sub	r22, r18
+ 53e:	73 0b       	sbc	r23, r19
+ 540:	84 0b       	sbc	r24, r20
+ 542:	ba 0b       	sbc	r27, r26
+ 544:	ee 1f       	adc	r30, r30
+ 546:	88 f7       	brcc	.-30     	; 0x52a <__divsf3_pse+0x90>
+ 548:	e0 95       	com	r30
+ 54a:	08 95       	ret
+
+0000054c <__fixsfdi>:
+ 54c:	be e3       	ldi	r27, 0x3E	; 62
+ 54e:	04 d0       	rcall	.+8      	; 0x558 <__fixunssfdi+0x2>
+ 550:	08 f4       	brcc	.+2      	; 0x554 <__fixsfdi+0x8>
+ 552:	90 e8       	ldi	r25, 0x80	; 128
+ 554:	08 95       	ret
+
+00000556 <__fixunssfdi>:
+ 556:	bf e3       	ldi	r27, 0x3F	; 63
+ 558:	22 27       	eor	r18, r18
+ 55a:	33 27       	eor	r19, r19
+ 55c:	a9 01       	movw	r20, r18
+ 55e:	70 d0       	rcall	.+224    	; 0x640 <__fp_splitA>
+ 560:	58 f1       	brcs	.+86     	; 0x5b8 <__fixunssfdi+0x62>
+ 562:	9f 57       	subi	r25, 0x7F	; 127
+ 564:	40 f1       	brcs	.+80     	; 0x5b6 <__fixunssfdi+0x60>
+ 566:	b9 17       	cp	r27, r25
+ 568:	38 f1       	brcs	.+78     	; 0x5b8 <__fixunssfdi+0x62>
+ 56a:	bf e3       	ldi	r27, 0x3F	; 63
+ 56c:	b9 1b       	sub	r27, r25
+ 56e:	99 27       	eor	r25, r25
+ 570:	b8 50       	subi	r27, 0x08	; 8
+ 572:	3a f4       	brpl	.+14     	; 0x582 <__fixunssfdi+0x2c>
+ 574:	66 0f       	add	r22, r22
+ 576:	77 1f       	adc	r23, r23
+ 578:	88 1f       	adc	r24, r24
+ 57a:	99 1f       	adc	r25, r25
+ 57c:	b3 95       	inc	r27
+ 57e:	d2 f3       	brmi	.-12     	; 0x574 <__fixunssfdi+0x1e>
+ 580:	16 c0       	rjmp	.+44     	; 0x5ae <__fixunssfdi+0x58>
+ 582:	b8 50       	subi	r27, 0x08	; 8
+ 584:	4a f0       	brmi	.+18     	; 0x598 <__fixunssfdi+0x42>
+ 586:	23 2f       	mov	r18, r19
+ 588:	34 2f       	mov	r19, r20
+ 58a:	45 2f       	mov	r20, r21
+ 58c:	56 2f       	mov	r21, r22
+ 58e:	67 2f       	mov	r22, r23
+ 590:	78 2f       	mov	r23, r24
+ 592:	88 27       	eor	r24, r24
+ 594:	b8 50       	subi	r27, 0x08	; 8
+ 596:	ba f7       	brpl	.-18     	; 0x586 <__fixunssfdi+0x30>
+ 598:	b8 5f       	subi	r27, 0xF8	; 248
+ 59a:	49 f0       	breq	.+18     	; 0x5ae <__fixunssfdi+0x58>
+ 59c:	86 95       	lsr	r24
+ 59e:	77 95       	ror	r23
+ 5a0:	67 95       	ror	r22
+ 5a2:	57 95       	ror	r21
+ 5a4:	47 95       	ror	r20
+ 5a6:	37 95       	ror	r19
+ 5a8:	27 95       	ror	r18
+ 5aa:	ba 95       	dec	r27
+ 5ac:	b9 f7       	brne	.-18     	; 0x59c <__fixunssfdi+0x46>
+ 5ae:	0e f4       	brtc	.+2      	; 0x5b2 <__fixunssfdi+0x5c>
+ 5b0:	10 d0       	rcall	.+32     	; 0x5d2 <__fp_negdi>
+ 5b2:	88 94       	clc
+ 5b4:	08 95       	ret
+ 5b6:	88 94       	clc
+ 5b8:	60 e0       	ldi	r22, 0x00	; 0
+ 5ba:	70 e0       	ldi	r23, 0x00	; 0
+ 5bc:	cb 01       	movw	r24, r22
+ 5be:	08 95       	ret
+
+000005c0 <__fp_inf>:
+ 5c0:	97 f9       	bld	r25, 7
+ 5c2:	9f 67       	ori	r25, 0x7F	; 127
+ 5c4:	80 e8       	ldi	r24, 0x80	; 128
+ 5c6:	70 e0       	ldi	r23, 0x00	; 0
+ 5c8:	60 e0       	ldi	r22, 0x00	; 0
+ 5ca:	08 95       	ret
+
+000005cc <__fp_nan>:
+ 5cc:	9f ef       	ldi	r25, 0xFF	; 255
+ 5ce:	80 ec       	ldi	r24, 0xC0	; 192
+ 5d0:	08 95       	ret
+
+000005d2 <__fp_negdi>:
+ 5d2:	90 95       	com	r25
+ 5d4:	80 95       	com	r24
+ 5d6:	70 95       	com	r23
+ 5d8:	60 95       	com	r22
+ 5da:	50 95       	com	r21
+ 5dc:	40 95       	com	r20
+ 5de:	30 95       	com	r19
+ 5e0:	21 95       	neg	r18
+ 5e2:	3f 4f       	sbci	r19, 0xFF	; 255
+ 5e4:	4f 4f       	sbci	r20, 0xFF	; 255
+ 5e6:	5f 4f       	sbci	r21, 0xFF	; 255
+ 5e8:	6f 4f       	sbci	r22, 0xFF	; 255
+ 5ea:	7f 4f       	sbci	r23, 0xFF	; 255
+ 5ec:	8f 4f       	sbci	r24, 0xFF	; 255
+ 5ee:	9f 4f       	sbci	r25, 0xFF	; 255
+ 5f0:	08 95       	ret
+
+000005f2 <__fp_pscA>:
+ 5f2:	00 24       	eor	r0, r0
+ 5f4:	0a 94       	dec	r0
+ 5f6:	16 16       	cp	r1, r22
+ 5f8:	17 06       	cpc	r1, r23
+ 5fa:	18 06       	cpc	r1, r24
+ 5fc:	09 06       	cpc	r0, r25
+ 5fe:	08 95       	ret
+
+00000600 <__fp_pscB>:
+ 600:	00 24       	eor	r0, r0
+ 602:	0a 94       	dec	r0
+ 604:	12 16       	cp	r1, r18
+ 606:	13 06       	cpc	r1, r19
+ 608:	14 06       	cpc	r1, r20
+ 60a:	05 06       	cpc	r0, r21
+ 60c:	08 95       	ret
+
+0000060e <__fp_round>:
+ 60e:	09 2e       	mov	r0, r25
+ 610:	03 94       	inc	r0
+ 612:	00 0c       	add	r0, r0
+ 614:	11 f4       	brne	.+4      	; 0x61a <__fp_round+0xc>
+ 616:	88 23       	and	r24, r24
+ 618:	52 f0       	brmi	.+20     	; 0x62e <__fp_round+0x20>
+ 61a:	bb 0f       	add	r27, r27
+ 61c:	40 f4       	brcc	.+16     	; 0x62e <__fp_round+0x20>
+ 61e:	bf 2b       	or	r27, r31
+ 620:	11 f4       	brne	.+4      	; 0x626 <__fp_round+0x18>
+ 622:	60 ff       	sbrs	r22, 0
+ 624:	04 c0       	rjmp	.+8      	; 0x62e <__fp_round+0x20>
+ 626:	6f 5f       	subi	r22, 0xFF	; 255
+ 628:	7f 4f       	sbci	r23, 0xFF	; 255
+ 62a:	8f 4f       	sbci	r24, 0xFF	; 255
+ 62c:	9f 4f       	sbci	r25, 0xFF	; 255
+ 62e:	08 95       	ret
+
+00000630 <__fp_split3>:
+ 630:	57 fd       	sbrc	r21, 7
+ 632:	90 58       	subi	r25, 0x80	; 128
+ 634:	44 0f       	add	r20, r20
+ 636:	55 1f       	adc	r21, r21
+ 638:	59 f0       	breq	.+22     	; 0x650 <__fp_splitA+0x10>
+ 63a:	5f 3f       	cpi	r21, 0xFF	; 255
+ 63c:	71 f0       	breq	.+28     	; 0x65a <__fp_splitA+0x1a>
+ 63e:	47 95       	ror	r20
+
+00000640 <__fp_splitA>:
+ 640:	88 0f       	add	r24, r24
+ 642:	97 fb       	bst	r25, 7
+ 644:	99 1f       	adc	r25, r25
+ 646:	61 f0       	breq	.+24     	; 0x660 <__fp_splitA+0x20>
+ 648:	9f 3f       	cpi	r25, 0xFF	; 255
+ 64a:	79 f0       	breq	.+30     	; 0x66a <__fp_splitA+0x2a>
+ 64c:	87 95       	ror	r24
+ 64e:	08 95       	ret
+ 650:	12 16       	cp	r1, r18
+ 652:	13 06       	cpc	r1, r19
+ 654:	14 06       	cpc	r1, r20
+ 656:	55 1f       	adc	r21, r21
+ 658:	f2 cf       	rjmp	.-28     	; 0x63e <__fp_split3+0xe>
+ 65a:	46 95       	lsr	r20
+ 65c:	f1 df       	rcall	.-30     	; 0x640 <__fp_splitA>
+ 65e:	08 c0       	rjmp	.+16     	; 0x670 <__fp_splitA+0x30>
+ 660:	16 16       	cp	r1, r22
+ 662:	17 06       	cpc	r1, r23
+ 664:	18 06       	cpc	r1, r24
+ 666:	99 1f       	adc	r25, r25
+ 668:	f1 cf       	rjmp	.-30     	; 0x64c <__fp_splitA+0xc>
+ 66a:	86 95       	lsr	r24
+ 66c:	71 05       	cpc	r23, r1
+ 66e:	61 05       	cpc	r22, r1
+ 670:	08 94       	sec
+ 672:	08 95       	ret
+
+00000674 <__fp_zero>:
+ 674:	e8 94       	clt
+
+00000676 <__fp_szero>:
+ 676:	bb 27       	eor	r27, r27
+ 678:	66 27       	eor	r22, r22
+ 67a:	77 27       	eor	r23, r23
+ 67c:	cb 01       	movw	r24, r22
+ 67e:	97 f9       	bld	r25, 7
+ 680:	08 95       	ret
+
+00000682 <__adddi3_s8>:
+ 682:	00 24       	eor	r0, r0
+ 684:	a7 fd       	sbrc	r26, 7
+ 686:	00 94       	com	r0
+ 688:	2a 0f       	add	r18, r26
+ 68a:	30 1d       	adc	r19, r0
+ 68c:	40 1d       	adc	r20, r0
+ 68e:	50 1d       	adc	r21, r0
+ 690:	60 1d       	adc	r22, r0
+ 692:	70 1d       	adc	r23, r0
+ 694:	80 1d       	adc	r24, r0
+ 696:	90 1d       	adc	r25, r0
+ 698:	08 95       	ret
+
+0000069a <__cmpdi2_s8>:
+ 69a:	00 24       	eor	r0, r0
+ 69c:	a7 fd       	sbrc	r26, 7
+ 69e:	00 94       	com	r0
+ 6a0:	2a 17       	cp	r18, r26
+ 6a2:	30 05       	cpc	r19, r0
+ 6a4:	40 05       	cpc	r20, r0
+ 6a6:	50 05       	cpc	r21, r0
+ 6a8:	60 05       	cpc	r22, r0
+ 6aa:	70 05       	cpc	r23, r0
+ 6ac:	80 05       	cpc	r24, r0
+ 6ae:	90 05       	cpc	r25, r0
+ 6b0:	08 95       	ret
+
+000006b2 <_exit>:
+ 6b2:	f8 94       	cli
+
+000006b4 <__stop_program>:
+ 6b4:	ff cf       	rjmp	.-2      	; 0x6b4 <__stop_program>

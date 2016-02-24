@@ -1,0 +1,194 @@
+
+AVRASM ver. 2.1.42  proteus.asm Thu Nov 20 13:27:14 2014
+
+                 
+                 
+000000 c012       RJMP PC+0x0013;
+000001 c052       RJMP PC+0x0053;
+000002 c05b       RJMP PC+0x005C;
+000003 c01d       RJMP PC+0x001E;
+000004 c01c       RJMP PC+0x001D ;		Relative jump 
+000005 c06c       RJMP PC+0x006D	;	Relative jump 
+000006 c061       RJMP PC+0x0062	;	Relative jump 
+000007 c019       RJMP PC+0x001A	;	Relative jump 
+000008 c018       RJMP PC+0x0019	;	Relative jump 
+000009 c017       RJMP PC+0x0018	;	Relative jump 
+00000a c016       RJMP PC+0x0017	;	Relative jump 
+00000b c015       RJMP PC+0x0016	;	Relative jump 
+00000c c014       RJMP PC+0x0015	;	Relative jump 
+00000d c013       RJMP PC+0x0014	;	Relative jump 
+00000e c012       RJMP PC+0x0013	;	Relative jump 
+00000f c011       RJMP PC+0x0012	;	Relative jump 
+000010 c010       RJMP PC+0x0011	;	Relative jump 
+000011 c00f       RJMP PC+0x0010	;	Relative jump 
+000012 c00e       RJMP PC+0x000F	;	Relative jump 
+000013 2411       CLR R1		;Clear Register 
+000014 be1f       OUT 0x3F,R1	;	Out to I/O location 
+000015 edcf       LDI R28,0xDF	;	Load immediate 
+000016 bfcd       OUT 0x3D,R28	;	Out to I/O location 
+000017 e020       LDI R18,0x00	;	Load immediate 
+000018 e6a0       LDI R26,0x60	;	Load immediate 
+000019 e0b0       LDI R27,0x00	;	Load immediate 
+00001a c001       RJMP PC+0x0002	;	Relative jump 
+00001b 921d       ST X+,R1	;	Store indirect and postincrement 
+00001c 36a2       CPI R26,0x62	;	Compare with immediate 
+00001d 07b2       CPC R27,R18	;	Compare with carry 
+                 ;--- No source file -------------------------------------------------------------
+00001e f7e1       BRNE PC-0x03	;	Branch if not equal 
+00001f d05c       RCALL PC+0x005D;		Relative call subroutine 
+000020 c05d       RJMP PC+0x005E	;	Relative jump 
+000021 cfde       RJMP PC-0x0021	;	Relative jump 
+                 ;--- D:\FreeTime\Biz\LED_Indication\LEDIndication\LEDIndication\Debug/.././LEDIndication.cpp 
+000022 ba17       OUT 0x17,R1	;	Out to I/O location 
+000023 e18c       LDI R24,0x1C	;	Load immediate 
+000024 bb87       OUT 0x17,R24	;	Out to I/O location 
+000025 ba18       OUT 0x18,R1	;	Out to I/O location 
+000026 bb88       OUT 0x18,R24	;	Out to I/O location 
+000027 ba11       OUT 0x11,R1	;	Out to I/O location 
+000028 e082       LDI R24,0x02	;	Load immediate 
+000029 bf85       OUT 0x35,R24	;	Out to I/O location 
+00002a e088       LDI R24,0x08	;	Load immediate 
+00002b bf85       OUT 0x35,R24	;	Out to I/O location 
+00002c ec80       LDI R24,0xC0	;	Load immediate 
+00002d bf8b       OUT 0x3B,R24	;	Out to I/O location 
+00002e b780       IN R24,0x30	;	In from I/O location 
+00002f 6083       ORI R24,0x03	;	Logical OR with immediate 
+000030 bf80       OUT 0x30,R24	;	Out to I/O location 
+000031 b780       IN R24,0x30	;	In from I/O location 
+000032 6880       ORI R24,0x80	;	Logical OR with immediate 
+000033 bf80       OUT 0x30,R24	;	Out to I/O location 
+000034 b780       IN R24,0x30	;	In from I/O location 
+000035 6280       ORI R24,0x20	;	Logical OR with immediate 
+000036 bf80       OUT 0x30,R24	;	Out to I/O location 
+000037 be13       OUT 0x33,R1	;	Out to I/O location 
+000038 be16       OUT 0x36,R1	;	Out to I/O location 
+000039 be1c       OUT 0x3C,R1	;	Out to I/O location 
+00003a b789       IN R24,0x39	;	In from I/O location 
+00003b 6082       ORI R24,0x02	;	Logical OR with immediate 
+                 ;--- D:\FreeTime\Biz\LED_Indication\LEDIndication\LEDIndication\Debug/.././LEDIndication.cpp 
+00003c bf89       OUT 0x39,R24	;	Out to I/O location 
+00003d b58f       IN R24,0x2F	;	In from I/O location 
+00003e 6083       ORI R24,0x03	;	Logical OR with immediate 
+00003f bd8f       OUT 0x2F,R24	;	Out to I/O location 
+000040 b58f       IN R24,0x2F	;	In from I/O location 
+000041 6880       ORI R24,0x80	;	Logical OR with immediate 
+000042 bd8f       OUT 0x2F,R24	;	Out to I/O location 
+000043 b58f       IN R24,0x2F	;	In from I/O location 
+000044 6280       ORI R24,0x20	;	Logical OR with immediate 
+000045 bd8f       OUT 0x2F,R24	;	Out to I/O location 
+000046 bc1e       OUT 0x2E,R1	;	Out to I/O location 
+000047 bc1b       OUT 0x2B,R1	;	Out to I/O location 
+000048 bc1a       OUT 0x2A,R1	;	Out to I/O location 
+000049 bc19       OUT 0x29,R1	;	Out to I/O location 
+00004a bc18       OUT 0x28,R1	;	Out to I/O location 
+                 ;--- D:\FreeTime\Biz\LED_Indication\LEDIndication\LEDIndication\Debug/.././LEDIndication.cpp 
+00004b b789       IN R24,0x39	;	In from I/O location 
+00004c 6880       ORI R24,0x80	;	Logical OR with immediate 
+00004d bf89       OUT 0x39,R24	;	Out to I/O location 
+00004e 9478       SEI 		;Global Interrupt Enable 
+00004f 9210 0061  STS 0x0061,R1	;	Store direct to data space 
+000051 9210 0060  STS 0x0060,R1	;	Store direct to data space 
+000053 9508       RET 		;Subroutine return 
+000054 921f       PUSH R1	;	Push register on stack 
+000055 920f       PUSH R0	;	Push register on stack 
+000056 b60f       IN R0,0x3F	;	In from I/O location 
+000057 920f       PUSH R0	;	Push register on stack 
+000058 2411       CLR R1		;Clear Register 
+000059 900f       POP R0		;Pop register from stack 
+00005a be0f       OUT 0x3F,R0	;	Out to I/O location 
+00005b 900f       POP R0		;Pop register from stack 
+                 ;--- D:\FreeTime\Biz\LED_Indication\LEDIndication\LEDIndication\Debug/.././LEDIndication.cpp 
+00005c 901f       POP R1		;Pop register from stack 
+00005d 9518       RETI 		;Interrupt return 
+00005e 921f       PUSH R1	;	Push register on stack 
+00005f 920f       PUSH R0	;	Push register on stack 
+000060 b60f       IN R0,0x3F	;	In from I/O location 
+000061 920f       PUSH R0	;	Push register on stack 
+000062 2411       CLR R1		;Clear Register 
+000063 900f       POP R0		;Pop register from stack 
+000064 be0f       OUT 0x3F,R0	;	Out to I/O location 
+000065 900f       POP R0		;Pop register from stack 
+000066 901f       POP R1		;Pop register from stack 
+000067 9518       RETI 		;Interrupt return 
+000068 921f       PUSH R1	;	Push register on stack 
+000069 920f       PUSH R0	;	Push register on stack 
+00006a b60f       IN R0,0x3F	;	In from I/O location 
+                 ;--- D:\FreeTime\Biz\LED_Indication\LEDIndication\LEDIndication\Debug/.././LEDIndication.cpp 
+00006b 920f       PUSH R0	;	Push register on stack 
+00006c 2411       CLR R1		;Clear Register 
+00006d 900f       POP R0		;Pop register from stack 
+00006e be0f       OUT 0x3F,R0	;	Out to I/O location 
+00006f 900f       POP R0		;Pop register from stack 
+000070 901f       POP R1		;Pop register from stack 
+000071 9518       RETI 		;Interrupt return 
+000072 921f       PUSH R1	;	Push register on stack 
+000073 920f       PUSH R0	;	Push register on stack 
+000074 b60f       IN R0,0x3F	;	In from I/O location 
+000075 920f       PUSH R0	;	Push register on stack 
+000076 2411       CLR R1		;Clear Register 
+000077 900f       POP R0		;Pop register from stack 
+000078 be0f       OUT 0x3F,R0	;	Out to I/O location 
+000079 900f       POP R0		;Pop register from stack 
+                 ;--- D:\FreeTime\Biz\LED_Indication\LEDIndication\LEDIndication\Debug/.././LEDIndication.cpp 
+00007a 901f       POP R1		;Pop register from stack 
+00007b 9518       RETI 		;Interrupt return 
+00007c dfa5       RCALL PC-0x005A;		Relative call subroutine 
+00007d cfff       RJMP PC-0x0000	;	Relative jump 
+                 ;--- No source file -------------------------------------------------------------
+00007e 94f8       CLI 		;Global Interrupt Disable 
+
+
+RESOURCE USE INFORMATION
+------------------------
+
+Notice:
+The register and instruction counts are symbol table hit counts,
+and hence implicitly used resources are not counted, eg, the
+'lpm' instruction without operands implicitly uses r0 and z,
+none of which are counted.
+
+x,y,z are separate entities in the symbol table and are
+counted separately from r26..r31 here.
+
+.dseg memory usage only counts static data declared with .byte
+
+Register use summary:
+r0 :  24 r1 :  28 r2 :   0 r3 :   0 r4 :   0 r5 :   0 r6 :   0 r7 :   0 
+r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   0 
+r16:   0 r17:   0 r18:   2 r19:   0 r20:   0 r21:   0 r22:   0 r23:   0 
+r24:  33 r25:   0 r26:   2 r27:   2 r28:   2 r29:   0 r30:   0 r31:   0 
+x  :   1 y  :   0 z  :   0 
+Registers used: 8 out of 35 (22.9%)
+
+Instruction use summary:
+.lds  :   0 .lds.l:   0 .sts  :   0 .sts.l:   0 adc   :   0 add   :   0 
+adiw  :   0 and   :   0 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 
+brbc  :   0 brbs  :   0 brcc  :   0 brcs  :   0 break :   0 breq  :   0 
+brge  :   0 brhc  :   0 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 
+brlt  :   0 brmi  :   0 brne  :   1 brpl  :   0 brsh  :   0 brtc  :   0 
+brts  :   0 brvc  :   0 brvs  :   0 bset  :   0 bst   :   0 call  :   0 
+cbi   :   0 cbr   :   0 clc   :   0 clh   :   0 cli   :   1 cln   :   0 
+clr   :   5 cls   :   0 clt   :   0 clv   :   0 clz   :   0 com   :   0 
+cp    :   0 cpc   :   1 cpi   :   1 cpse  :   0 dec   :   0 des   :   0 
+eicall:   0 eijmp :   0 elpm  :   0 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :  12 inc   :   0 jmp   :   0 
+lac   :   0 las   :   0 lat   :   0 ld    :   0 ldd   :   0 ldi   :   8 
+lds   :   0 lpm   :   0 lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 
+mul   :   0 muls  :   0 mulsu :   0 neg   :   0 nop   :   0 or    :   0 
+ori   :   8 out   :  30 pop   :  12 push  :  12 rcall :   2 ret   :   1 
+reti  :   4 rjmp  :  24 rol   :   0 ror   :   0 sbc   :   0 sbci  :   0 
+sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 sbrc  :   0 
+sbrs  :   0 sec   :   0 seh   :   0 sei   :   1 sen   :   0 ser   :   0 
+ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 spm   :   0 
+st    :   1 std   :   0 sts   :   2 sub   :   0 subi  :   0 swap  :   0 
+tst   :   0 wdr   :   0 xch   :   0 
+Instructions used: 18 out of 123 (14.6%)
+
+Memory use summary [bytes]:
+Segment   Begin    End      Code   Data   Used    Size   Use%
+---------------------------------------------------------------
+[.cseg] 0x000000 0x000100    256      0    256 unknown      -
+[.dseg] 0x000060 0x000060      0      0      0 unknown      -
+[.eseg] 0x000000 0x000000      0      0      0 unknown      -
+
+Assembly complete, 0 errors, 0 warnings

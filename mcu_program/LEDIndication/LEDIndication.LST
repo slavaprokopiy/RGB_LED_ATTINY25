@@ -1,0 +1,6 @@
+
+AVRASM ver. 2.1.42  LEDIndication\LEDIndication\LEDIndication.cpp Thu Nov 20 13:04:21 2014
+
+LEDIndication\LEDIndication\LEDIndication.cpp(9): error: Cannot find include file: avr/io.h
+LEDIndication\LEDIndication\LEDIndication.cpp(10): error: Cannot find include file: avr/interrupt.h
+LEDIndication\LEDIndication\LEDIndication.cpp(13): error: syntax error, unexpected FUNCTION
